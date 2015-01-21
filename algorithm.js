@@ -20,6 +20,7 @@ var Algorithm = {
 		//solution2. half is the solution
 		var half = (start + end) / 2.0;
 		var halfVal = fun(half);
+		//console.log("half: " + half + "  halfVal: " + halfVal);
 		if (Algorithm.isInRange(halfVal, targetVal - BINARY_SEARCH_EPSILON, targetVal+ BINARY_SEARCH_EPSILON)) {
 			return half;
 		}

@@ -58,9 +58,13 @@ angle *= DEG_TO_RAD;
 sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).rotate(0, 0, 60);
 console.log(sa0.toString());
 
-console.log(sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).toString());
 
+var calculateRodLength = function(height) {
+	var mp = mp0.clone();
+	return mp.translate(0, 0, height).diff(sa0);
+}
 
-console.log(SA.clone().moveTo(0, 0, 0).diff(SA.clone().moveTo(1, 1, 1)));
-//Algorithm.binarySearch(0, 200, )
+var heightSolution = Algorithm.binarySearch(0, 200, calculateRodLength, ROD_LENGTH);
+console.log("height is : " + heightSolution);
+
 
