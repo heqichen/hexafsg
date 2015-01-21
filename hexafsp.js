@@ -6,7 +6,8 @@ var Algorithm = require("./algorithm");
 var ARM_LENGTH = 22.3;
 var ROD_LENGTH = 109.00;
 
-
+var PI = 3.1415926535897932384626433832795;
+var DEG_TO_RAD = PI / 180.0;
 
 //setup Moving Points
 var mp0 = new Point3D(-6.055, 69.82, 0);
@@ -51,4 +52,15 @@ console.log("result is : " + result);
 
 result = Algorithm.binarySearch(5, 10, foo, 2.22);
 console.log("result is : " + result);
+
+var angle = 0;
+angle *= DEG_TO_RAD;
+sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).rotate(0, 0, 60);
+console.log(sa0.toString());
+
+console.log(sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).toString());
+
+
+console.log(SA.clone().moveTo(0, 0, 0).diff(SA.clone().moveTo(1, 1, 1)));
+//Algorithm.binarySearch(0, 200, )
 

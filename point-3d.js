@@ -99,7 +99,23 @@ this.moveTo = function(p1, p2, p3) {
 		self.z = p3;
 	}
 	return self;
-}
+};
+
+this.diff = function (p1, p2, p3) {
+	var dx = 0.0;
+	var dy = 0.0;
+	var dz = 0.0;
+	if (p2===undefined && p3===undefined) {
+		dx = self.x - p1.x;
+		dy = self.y - p1.y;
+		dz = self.z - p1.z;
+	} else {
+		dx = self.x - p1;
+		dy = self.y - p2;
+		dz = self.z - p3;
+	}
+	return Math.sqrt(dx*dx + dy*dy + dz*dz);
+};
 
 };
 
