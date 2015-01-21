@@ -45,8 +45,15 @@ this.translate = function(p1, p2, p3) {
 var rotateX = function(angle) {
 	angle = angle * PI / 180.0;
 	var temp = self.y;
-	self.y = self.y * Math.cos(angle) - self.z*Math.sin(angle);
+	self.y = self.y * Math.cos(angle) - self.z * Math.sin(angle);
 	self.z = temp * Math.sin(angle) + self.z * Math.cos(angle);
+}
+
+var rotateY = function(angle) {
+	angle = angle * PI / 180.0;
+	var temp = self.z;
+	self.z = self.z * Math.cos(angle) - self.x * Math.sin(angle);
+	self.x = temp * Math.sin(angle) + self.x * Math.cos(angle);
 }
 
 this.rotate = function (p1, p2, p3) {
@@ -64,6 +71,7 @@ this.rotate = function (p1, p2, p3) {
 	}
 
 	rotateX(angleX);
+	rotateY(angleY);
 
 	return self;
 };
