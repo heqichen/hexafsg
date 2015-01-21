@@ -27,27 +27,20 @@ DEFAULT_MOVING_POINT[5] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET
 
 var mp = [];
 //setup Servo Axis
-var sa0 = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 60);
-var sa1 = new Point3D(-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 60);
-var sa2 = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 180);
-var sa3 = new Point3D(-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 180);
-var sa4 = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 300);
-var sa5 = new Point3D(-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 300);
-
-var SA = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0);
+var DEFAULT_SERVO_POSITION = [
+	[SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 60], 
+	[-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 60], 
+	[SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 180], 
+	[-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 180], 
+	[SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 300], 
+	[-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0, 0, 0, 300], 
+];
 
 var i;
 for (i=0; i<DEFAULT_MOVING_POINT.length; ++i) {
 	console.log("moving point [" + i + "] : " + DEFAULT_MOVING_POINT[i].toString());
 	mp[i] = DEFAULT_MOVING_POINT[i].clone();
 }
-
-console.log(sa0.toString());
-console.log(sa1.toString());
-console.log(sa2.toString());
-console.log(sa3.toString());
-console.log(sa4.toString());
-console.log(sa5.toString());
 
 
 var hexafspHelper = {
@@ -75,21 +68,25 @@ var printPlatform = function() {
 		console.log("moving point [" + i + "]: " + mp[i]);
 	}
 }
-setPlatformRotate(-10, 0, 0);
+setPlatformRotate(10, 0, 0);
 printPlatform();
 
 
 var ts = new Point3D();
 
-var servo0DiffOnAngle = function(angle) {
+var servoAngleDiffFun = function(idx, angle) {
 	angle *= DEG_TO_RAD;
-	ts.moveTo(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0);
+	ts.moveTo(DEFAULT_SERVO_POSITION[idx][0], DEFAULT_SERVO_POSITION[idx][1], DEFAULT_SERVO_POSITION[idx][2]);
 	ts.translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle));
-	ts.rotate(0, 0, 60);
-	var diff = ts.diff(mp[0]);
+	ts.rotate(DEFAULT_SERVO_POSITION[idx][3], DEFAULT_SERVO_POSITION[idx][4], DEFAULT_SERVO_POSITION[idx][5]);
+	var diff = ts.diff(mp[idx]);
 	diff -= ROD_LENGTH;
 	return diff;
-}
+};
+
+var servo0DiffOnAngle = function(angle) {
+	return servoAngleDiffFun(0, angle);
+};
 
 function findAngle0() {
 	var res = Algorithm.binarySearch(-90, 90, servo0DiffOnAngle, 0.0);
