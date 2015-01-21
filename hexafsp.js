@@ -38,7 +38,7 @@ var DEFAULT_SERVO_POSITION = [
 
 var i;
 for (i=0; i<DEFAULT_MOVING_POINT.length; ++i) {
-	console.log("moving point [" + i + "] : " + DEFAULT_MOVING_POINT[i].toString());
+	//console.log("moving point [" + i + "] : " + DEFAULT_MOVING_POINT[i].toString());
 	mp[i] = DEFAULT_MOVING_POINT[i].clone();
 }
 
@@ -106,7 +106,7 @@ var Hexafsp = {
 	},
 };
 
-Hexafsp.rotatePlatform(10, 0, 0);
-console.log(Hexafsp.getServosAngle());
+//Hexafsp.rotatePlatform(10, 0, 0);
+//console.log(Hexafsp.getServosAngle());
 
 module.exports = Hexafsp;
