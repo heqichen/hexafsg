@@ -84,6 +84,10 @@ this.rotate = function (p1, p2, p3) {
 	return self;
 };
 
+this.clone = function () {
+	return new Point3D(self.x, self.y, self.z);
+};
+
 
 };
 

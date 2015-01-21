@@ -24,6 +24,8 @@ var sa3 = new Point3D(-9.777, 79.840, 0).rotate(0, 0, 180);
 var sa4 = new Point3D(9.777, 79.840, 0).rotate(0, 0, 300);
 var sa5 = new Point3D(-9.777, 79.840, 0).rotate(0, 0, 300);
 
+var SA = new Point3D(9.777, 79.840, 0);
+
 console.log(mp0.toString());
 console.log(mp1.toString());
 console.log(mp2.toString());
@@ -43,8 +45,14 @@ var foo = function(val) {
 	return val;
 }
 
+
 var result = Algorithm.binarySearch(0, 10, foo, 2.22);
 console.log("result is : " + result);
 
 result = Algorithm.binarySearch(5, 10, foo, 2.22);
 console.log("result is : " + result);
+
+var p = SA.clone();
+p.translate(1,2,2);
+console.log(SA.toString());
+console.log(p.toString());

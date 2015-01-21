@@ -34,8 +34,6 @@ var Algorithm = {
 			}
 		}
 
-
-
 	}, 
 
 	binarySearch : function(start, end, fun, targetVal) {
