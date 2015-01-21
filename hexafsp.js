@@ -2,25 +2,17 @@
 
 var Point3D = require("./point-3d");
 
-var p = new Point3D(1, 2, 3);
+//setup Moving Points
+var mp0 = new Point3D(-6.055, 69.82, 0);
+var mp1 = new Point3D(6.055, 69.82, 0).rotate(0, 0, 120);
+var mp2 = new Point3D(-6.055, 69.82, 0).rotate(0, 0, 120);
+var mp3 = new Point3D(6.055, 69.82, 0).rotate(0, 0, 240);
+var mp4 = new Point3D(-6.055, 69.82, 0).rotate(0, 0, 240);
+var mp5 = new Point3D(6.055, 69.82, 0).rotate(0, 0, 0);
 
-
-
-console.log(p.toString());
-
-console.log(p.translate(1, 2, 3).toString());
-
-console.log(p.translate(p).toString());
-
-var p2 = new Point3D(1, 2, 3);
-p2.rotate(90, 0, 0).rotate(45, 0, 0);
-
-console.log(p2.toString());
-
-var p3 = new Point3D(1, 2, 3);
-console.log(p3.toString());
-console.log(p3.rotate(0, 90, 0).toString());
-console.log(p3.rotate(0, -180, 0).toString());
-
-var p4 = new Point3D(1, 2, 3);
-console.log(p4.rotate(0, 0, 90).toString());
+console.log(mp0.toString());
+console.log(mp1.toString());
+console.log(mp2.toString());
+console.log(mp3.toString());
+console.log(mp4.toString());
+console.log(mp5.toString());
