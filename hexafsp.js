@@ -17,12 +17,13 @@ var SERVO_OFFSET_Y = 79.840;
 
 
 //setup Moving Points
-var mp0 = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z);
-var mp1 = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 120);
-var mp2 = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 120);
-var mp3 = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 240);
-var mp4 = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 240);
-var mp5 = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 0);
+var DEFAULT_MOVING_POINT = [];
+DEFAULT_MOVING_POINT[0] = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z);
+DEFAULT_MOVING_POINT[1] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 120);
+DEFAULT_MOVING_POINT[2] = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 120);
+DEFAULT_MOVING_POINT[3] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 240);
+DEFAULT_MOVING_POINT[4] = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 240);
+DEFAULT_MOVING_POINT[5] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 0);
 
 //setup Servo Axis
 var sa0 = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 60);
@@ -34,12 +35,10 @@ var sa5 = new Point3D(-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 300);
 
 var SA = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0);
 
-console.log(mp0.toString());
-console.log(mp1.toString());
-console.log(mp2.toString());
-console.log(mp3.toString());
-console.log(mp4.toString());
-console.log(mp5.toString());
+var i;
+for (i=0; i<DEFAULT_MOVING_POINT.length; ++i) {
+	console.log("moving point [" + i + "] : " + DEFAULT_MOVING_POINT[i].toString());
+}
 
 console.log(sa0.toString());
 console.log(sa1.toString());
