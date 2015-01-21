@@ -10,9 +10,25 @@ var mp3 = new Point3D(6.055, 69.82, 0).rotate(0, 0, 240);
 var mp4 = new Point3D(-6.055, 69.82, 0).rotate(0, 0, 240);
 var mp5 = new Point3D(6.055, 69.82, 0).rotate(0, 0, 0);
 
+//setup Servo Axis
+var sa0 = new Point3D(9.777, 79.840, 0).rotate(0, 0, 60);
+var sa1 = new Point3D(-9.777, 79.840, 0).rotate(0, 0, 60);
+var sa2 = new Point3D(9.777, 79.840, 0).rotate(0, 0, 180);
+var sa3 = new Point3D(-9.777, 79.840, 0).rotate(0, 0, 180);
+var sa4 = new Point3D(9.777, 79.840, 0).rotate(0, 0, 300);
+var sa5 = new Point3D(-9.777, 79.840, 0).rotate(0, 0, 300);
+
 console.log(mp0.toString());
 console.log(mp1.toString());
 console.log(mp2.toString());
 console.log(mp3.toString());
 console.log(mp4.toString());
 console.log(mp5.toString());
+
+console.log(sa0.toString());
+console.log(sa1.toString());
+console.log(sa2.toString());
+console.log(sa3.toString());
+console.log(sa4.toString());
+console.log(sa5.toString());
+
