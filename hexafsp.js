@@ -62,12 +62,6 @@ var hexafspHelper = {
 	}
 };
 
-var angle = 0;
-angle *= DEG_TO_RAD;
-sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).rotate(0, 0, 60);
-console.log(sa0.toString());
-
-
 var setPlatformRotate = function(pitch, roll, heading) {
 	var i;
 	for (i=0; i<6; ++i) {
@@ -81,5 +75,25 @@ var printPlatform = function() {
 		console.log("moving point [" + i + "]: " + mp[i]);
 	}
 }
-setPlatformRotate(10, 0, 0);
+setPlatformRotate(-10, 0, 0);
 printPlatform();
+
+
+var ts = new Point3D();
+
+var servo0DiffOnAngle = function(angle) {
+	angle *= DEG_TO_RAD;
+	ts.moveTo(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0);
+	ts.translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle));
+	ts.rotate(0, 0, 60);
+	var diff = ts.diff(mp[0]);
+	diff -= ROD_LENGTH;
+	return diff;
+}
+
+function findAngle0() {
+	var res = Algorithm.binarySearch(-90, 90, servo0DiffOnAngle, 0.0);
+	console.log(res);
+}
+
+findAngle0();
