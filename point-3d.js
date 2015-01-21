@@ -20,10 +20,25 @@ if (sz) {
 	self.z = sz;
 }
 
+var translateDimension = function(px, py, pz) {
+	self.x += px;
+	self.y += py;
+	self.z += pz;
+}
 
 this.toString = function() {
 	return "(" + self.x + ", " + self.y + ", " + self.z + ")";
 };
+
+this.translate = function(p1, p2, p3) {
+	if (p2 === undefined && p3 === undefined) {
+		translateDimension(p1.x, p1.y, p1.z);
+		return self;
+	} else {
+		translateDimension(p1, p2, p3);
+		return self;
+	}
+}
 
 
 };
