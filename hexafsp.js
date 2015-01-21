@@ -77,20 +77,35 @@ var ts = new Point3D();
 var servoAngleDiffFun = function(idx, angle) {
 	angle *= DEG_TO_RAD;
 	ts.moveTo(DEFAULT_SERVO_POSITION[idx][0], DEFAULT_SERVO_POSITION[idx][1], DEFAULT_SERVO_POSITION[idx][2]);
-	ts.translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle));
+	if (idx % 2 > 0) {
+		ts.translate(-ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle));
+	} else {
+		ts.translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle));
+	}
+	
 	ts.rotate(DEFAULT_SERVO_POSITION[idx][3], DEFAULT_SERVO_POSITION[idx][4], DEFAULT_SERVO_POSITION[idx][5]);
 	var diff = ts.diff(mp[idx]);
 	diff -= ROD_LENGTH;
 	return diff;
 };
+var singleServoDiffFun = [];
+singleServoDiffFun[0] = function(angle) { return servoAngleDiffFun(0, angle);};
+singleServoDiffFun[1] = function(angle) { return servoAngleDiffFun(1, angle);};
+singleServoDiffFun[2] = function(angle) { return servoAngleDiffFun(2, angle);};
+singleServoDiffFun[3] = function(angle) { return servoAngleDiffFun(3, angle);};
+singleServoDiffFun[4] = function(angle) { return servoAngleDiffFun(4, angle);};
+singleServoDiffFun[5] = function(angle) { return servoAngleDiffFun(5, angle);};
 
-var servo0DiffOnAngle = function(angle) {
-	return servoAngleDiffFun(0, angle);
-};
-
-function findAngle0() {
-	var res = Algorithm.binarySearch(-90, 90, servo0DiffOnAngle, 0.0);
+function findAngle() {
+	var i;
+	var res = [];
+	for (i=0; i<6; ++i) {
+		res[i] = Algorithm.binarySearch(-90, 90, singleServoDiffFun[i], 0.0);
+	}
+	
 	console.log(res);
 }
 
-findAngle0();
+findAngle();
+setPlatformRotate(-5, 0, 0);
+findAngle();
