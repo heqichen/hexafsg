@@ -106,7 +106,4 @@ var Hexafsp = {
 	},
 };
 
-//Hexafsp.rotatePlatform(10, 0, 0);
-//console.log(Hexafsp.getServosAngle());
-
 module.exports = Hexafsp;
