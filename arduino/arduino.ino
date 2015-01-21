@@ -11,6 +11,8 @@ void setup()
 	for (i=0; i<6; ++i)
 	{
 		servo[i].attach(2+i);
+		angle[i] = 90;
+		servo[i].write(90);
 	}
 	Serial.begin(9600);
 }
