@@ -56,6 +56,13 @@ var rotateY = function(angle) {
 	self.x = temp * Math.sin(angle) + self.x * Math.cos(angle);
 }
 
+var rotateZ = function(angle) {
+	angle = angle * PI / 180.0;
+	var temp = self.x;
+	self.x = self.x * Math.cos(angle) - self.y * Math.sin(angle);
+	self.y = temp * Math.sin(angle) + self.y * Math.cos(angle);
+}
+
 this.rotate = function (p1, p2, p3) {
 	var angleX = 0;
 	var angleY = 0;
@@ -72,6 +79,7 @@ this.rotate = function (p1, p2, p3) {
 
 	rotateX(angleX);
 	rotateY(angleY);
+	rotateZ(angleZ);
 
 	return self;
 };

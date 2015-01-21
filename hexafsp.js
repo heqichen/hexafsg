@@ -21,3 +21,6 @@ var p3 = new Point3D(1, 2, 3);
 console.log(p3.toString());
 console.log(p3.rotate(0, 90, 0).toString());
 console.log(p3.rotate(0, -180, 0).toString());
+
+var p4 = new Point3D(1, 2, 3);
+console.log(p4.rotate(0, 0, 90).toString());
