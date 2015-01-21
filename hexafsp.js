@@ -25,6 +25,7 @@ DEFAULT_MOVING_POINT[3] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET
 DEFAULT_MOVING_POINT[4] = new Point3D(-MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 240);
 DEFAULT_MOVING_POINT[5] = new Point3D(MOVING_POINT_OFFSET_X, MOVING_POINT_OFFSET_Y, MOVING_POINT_OFFSET_Z).rotate(0, 0, 0);
 
+var mp = [];
 //setup Servo Axis
 var sa0 = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 60);
 var sa1 = new Point3D(-SERVO_OFFSET_X, SERVO_OFFSET_Y, 0).rotate(0, 0, 60);
@@ -38,6 +39,7 @@ var SA = new Point3D(SERVO_OFFSET_X, SERVO_OFFSET_Y, 0);
 var i;
 for (i=0; i<DEFAULT_MOVING_POINT.length; ++i) {
 	console.log("moving point [" + i + "] : " + DEFAULT_MOVING_POINT[i].toString());
+	mp[i] = DEFAULT_MOVING_POINT[i].clone();
 }
 
 console.log(sa0.toString());
@@ -65,3 +67,19 @@ angle *= DEG_TO_RAD;
 sa0.moveTo(SA).translate(ARM_LENGTH*Math.cos(angle), 0, ARM_LENGTH*Math.sin(angle)).rotate(0, 0, 60);
 console.log(sa0.toString());
 
+
+var setPlatformRotate = function(pitch, roll, heading) {
+	var i;
+	for (i=0; i<6; ++i) {
+		mp[i].moveTo(DEFAULT_MOVING_POINT[i]).rotate(pitch, roll, heading);
+	}
+}
+
+var printPlatform = function() {
+	var i;
+	for (i=0; i<6; ++i) {
+		console.log("moving point [" + i + "]: " + mp[i]);
+	}
+}
+setPlatformRotate(10, 0, 0);
+printPlatform();
