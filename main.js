@@ -7,14 +7,14 @@ var http = require("http");
 var url = require("url");
 
 
-var NAUTRAL_ANGLE = [90, 90, 90, 90, 90, 90];
+var NAUTRAL_ANGLE = [88, 94, 84, 90, 86, 90];
 fsp.rotatePlatform(10, 0, 0);
 console.log(fsp.getServosAngle());
 
 var sp = new SerialPort("/dev/ttyUSB0", {baudrate:9600}, false);
 
 var serialDone = function() {
-//	sp.write("60,60,60,60,60,60,360\n");
+	movePlatform({pitch:0,roll:0,heading:0});
 	startHttpServer();
 };
 
@@ -37,9 +37,13 @@ var movePlatform = function(movement) {
 	var i;
 	var sum = 0;
 	var command = "";
-	for (i=0; i<6; ++i)
-	{
-		arduinoAngles[i] = NAUTRAL_ANGLE[i] + fspAngles[i];
+	for (i=0; i<6; ++i) {
+		if (i%2 > 0) {
+			arduinoAngles[i] = NAUTRAL_ANGLE[i] - fspAngles[i];
+		} else {
+			arduinoAngles[i] = NAUTRAL_ANGLE[i] + fspAngles[i];
+		}
+		
 		var sendAngle = (arduinoAngles[i]).toFixed(2);
 		sum += Number(sendAngle);
 		command += sendAngle + ",";
