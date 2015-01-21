@@ -88,6 +88,18 @@ this.clone = function () {
 	return new Point3D(self.x, self.y, self.z);
 };
 
+this.moveTo = function(p1, p2, p3) {
+	if (p2===undefined && p3===undefined) {
+		self.x = p1.x;
+		self.y = p1.y;
+		self.z = p1.z;
+	} else {
+		self.x = p1;
+		self.y = p2;
+		self.z = p3;
+	}
+	return self;
+}
 
 };
 

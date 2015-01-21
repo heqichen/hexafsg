@@ -52,7 +52,3 @@ console.log("result is : " + result);
 result = Algorithm.binarySearch(5, 10, foo, 2.22);
 console.log("result is : " + result);
 
-var p = SA.clone();
-p.translate(1,2,2);
-console.log(SA.toString());
-console.log(p.toString());
