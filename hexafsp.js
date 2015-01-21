@@ -55,21 +55,7 @@ var hexafspHelper = {
 	}
 };
 
-var setPlatformRotate = function(pitch, roll, heading) {
-	var i;
-	for (i=0; i<6; ++i) {
-		mp[i].moveTo(DEFAULT_MOVING_POINT[i]).rotate(pitch, roll, heading);
-	}
-}
 
-var printPlatform = function() {
-	var i;
-	for (i=0; i<6; ++i) {
-		console.log("moving point [" + i + "]: " + mp[i]);
-	}
-}
-setPlatformRotate(10, 0, 0);
-printPlatform();
 
 
 var ts = new Point3D();
@@ -96,16 +82,31 @@ singleServoDiffFun[3] = function(angle) { return servoAngleDiffFun(3, angle);};
 singleServoDiffFun[4] = function(angle) { return servoAngleDiffFun(4, angle);};
 singleServoDiffFun[5] = function(angle) { return servoAngleDiffFun(5, angle);};
 
-function findAngle() {
+var printPlatform = function() {
 	var i;
-	var res = [];
 	for (i=0; i<6; ++i) {
-		res[i] = Algorithm.binarySearch(-90, 90, singleServoDiffFun[i], 0.0);
+		console.log("moving point [" + i + "]: " + mp[i]);
 	}
-	
-	console.log(res);
 }
 
-findAngle();
-setPlatformRotate(-5, 0, 0);
-findAngle();
+var Hexafsp = {
+	rotatePlatform: function(pitch, roll, heading) {
+		var i;
+		for (i=0; i<6; ++i) {
+			mp[i].moveTo(DEFAULT_MOVING_POINT[i]).rotate(pitch, roll, heading);
+		}
+	},
+	getServosAngle: function() {
+		var i;
+		var res = [];
+		for (i=0; i<6; ++i) {
+			res[i] = Algorithm.binarySearch(-90, 90, singleServoDiffFun[i], 0.0);
+		}
+		return res;
+	},
+};
+
+Hexafsp.rotatePlatform(10, 0, 0);
+console.log(Hexafsp.getServosAngle());
+
+module.exports = Hexafsp;
