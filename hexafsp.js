@@ -1,6 +1,12 @@
 "use strict"
 
 var Point3D = require("./point-3d");
+var Algorithm = require("./algorithm");
+
+var ARM_LENGTH = 22.3;
+var ROD_LENGTH = 109.00;
+
+
 
 //setup Moving Points
 var mp0 = new Point3D(-6.055, 69.82, 0);
@@ -32,3 +38,13 @@ console.log(sa3.toString());
 console.log(sa4.toString());
 console.log(sa5.toString());
 
+
+var foo = function(val) {
+	return val;
+}
+
+var result = Algorithm.binarySearch(0, 10, foo, 2.22);
+console.log("result is : " + result);
+
+result = Algorithm.binarySearch(5, 10, foo, 2.22);
+console.log("result is : " + result);
