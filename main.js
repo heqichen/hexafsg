@@ -5,7 +5,8 @@ var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
 var http = require("http");
 var url = require("url");
-
+var socketIo = require("socket.io");
+var express = require("express");
 
 var NAUTRAL_ANGLE = [88, 94, 84, 90, 86, 90];
 fsp.rotatePlatform(10, 0, 0);
@@ -85,4 +86,36 @@ var startHttpServer = function()
 
 	server.listen(8080);
 }
+
+var expressApp = express();
+var expressHttp = http.Server(expressApp);
+var io = socketIo(expressHttp);
+
+expressApp.get("/fsp", function(req, resp) {
+	resp.sendfile("./test-html/fsp.html");
+});
+
+expressApp.get("/fsp.js", function(req, resp) {
+	resp.sendfile("./test-html/fsp.js");
+});
+
+expressApp.get("/jquery-1.11.2.min.js", function(req, resp) {
+	resp.sendfile("./test-html/jquery-1.11.2.min.js");
+});
+
+expressApp.get("/socket.io-1.2.0.js", function(req, resp) {
+	resp.sendfile("./test-html/socket.io-1.2.0.js");
+});
+
+	
+io.on("connection", function(socket) {
+	socket.on("command", function(motion) {
+		//console.log("here is a command: " + motion);
+		movePlatform(motion);
+	});
+});
+
+expressHttp.listen(3000, function() {
+	console.log("listening on 3000");
+});
 
